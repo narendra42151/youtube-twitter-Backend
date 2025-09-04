@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: youtweet-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: youtweet-app
+  template:
+    metadata:
+      labels:
+        app: youtweet-app
+    spec:
+      containers:
+      - name: youtweet-app
+        image: narendra42151/youtweet-app:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
+        # Add other environment variables here if needed
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: youtweet-service
+spec:
+  type: NodePort
+  selector:
+    app: youtweet-app
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      nodePort: 30080
