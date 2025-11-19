@@ -1,0 +1,18 @@
+services:
+  app:
+    image: narendra42151/youtweet:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    environment:
+      CORS_ORIGIN: "${CORS_ORIGIN:-*}"
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    depends_on: []
+
+networks:
+  default:
+    driver: bridge

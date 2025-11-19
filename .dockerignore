@@ -2,3 +2,6 @@ node_modules
 npm-debug.log
 .env
 public/temp
+.git
+api_test_outputs
+scripts
